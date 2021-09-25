@@ -1,0 +1,16 @@
+version: '2.2'
+networks:
+  default:
+    name: GoBB
+services:
+  app:
+    build:
+      context: ../.
+      dockerfile: local/Dockerfile
+    container_name: GoBB
+    hostname: dev-gobb
+    env_file: .env
+    volumes:
+      - ../:/GoBB
+    ports:
+      - 8000:8000

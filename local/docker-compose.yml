@@ -14,3 +14,24 @@ services:
       - ../:/GoBB
     ports:
       - 8000:8000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13.4
+    ports:
+      - 5432:5432
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER: gobb
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gobb_dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      retries: 3
+    networks:
+      default:
+        aliases:
+          - db.postgres

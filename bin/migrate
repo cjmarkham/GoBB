@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -o allexport; source local/.env.local; set +o allexport
+
+migrate -database ${POSTGRES_DSN} -path db/migrations up

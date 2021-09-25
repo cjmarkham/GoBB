@@ -1,9 +1,13 @@
 package home
 
-type Controller struct {
+import "github.com/cjmarkham/GoBB/src/domain/forum"
 
+type Controller struct {
+	service forum.Service
 }
 
-func ProvideHomeController () (*Controller, error) {
-	return &Controller{}, nil
+func ProvideHomeController (service forum.Service) (*Controller, error) {
+	return &Controller{
+		service: service,
+	}, nil
 }

@@ -1,4 +1,4 @@
-package GoBB
+package src
 
 import (
 	"fmt"

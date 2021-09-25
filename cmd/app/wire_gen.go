@@ -10,13 +10,23 @@ import (
 	"github.com/cjmarkham/GoBB/src"
 	"github.com/cjmarkham/GoBB/src/controllers"
 	"github.com/cjmarkham/GoBB/src/controllers/home"
+	forum2 "github.com/cjmarkham/GoBB/src/domain/forum"
+	"github.com/cjmarkham/GoBB/src/repository"
+	"github.com/cjmarkham/GoBB/src/repository/forum"
 	"github.com/google/wire"
 )
 
 // Injectors from wire.go:
 
 func InitializeApp() (*App, error) {
-	controller, err := home.ProvideHomeController()
+	postgresqlConfig, err := config.ProvidePostgresqlConfig()
+	if err != nil {
+		return nil, err
+	}
+	db := repository.ProvideClient(postgresqlConfig)
+	forumRepository := forum.ProvideRepository(postgresqlConfig, db)
+	service := forum2.ProvideService(forumRepository)
+	controller, err := home.ProvideHomeController(service)
 	if err != nil {
 		return nil, err
 	}
@@ -43,3 +53,7 @@ func InitializeApp() (*App, error) {
 var configProviders = wire.NewSet(config.ProvideServerConfig, config.ProvideLoggerConfig)
 
 var controllerProviders = wire.NewSet(home.ProvideHomeController)
+
+var serviceProviders = wire.NewSet(forum2.ProvideService)
+
+var repositoryProviders = wire.NewSet(config.ProvidePostgresqlConfig, repository.ProvideClient, forum.ProvideRepository, wire.Bind(new(forum2.Repository), new(*forum.Repository)))

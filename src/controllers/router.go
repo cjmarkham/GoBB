@@ -3,14 +3,13 @@ package controllers
 import (
 	"net/http"
 
+	home2 "github.com/cjmarkham/GoBB/src/controllers/home"
 	"github.com/gorilla/mux"
 	"github.com/rs/zerolog"
-
-	"github.com/cjmarkham/GoBB/controllers/home"
 )
 
 func ProvideRouter(
-	homeController *home.Controller,
+	homeController *home2.Controller,
 	logger zerolog.Logger,
 ) *mux.Router {
 	router := &mux.Router{}

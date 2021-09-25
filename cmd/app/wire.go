@@ -6,12 +6,12 @@ import (
 	"net/http"
 
 	"github.com/cjmarkham/GoBB/config"
+	controllers2 "github.com/cjmarkham/GoBB/src/controllers"
+	home2 "github.com/cjmarkham/GoBB/src/controllers/home"
 	"github.com/google/wire"
 	"github.com/gorilla/mux"
 
 	"github.com/cjmarkham/GoBB"
-	"github.com/cjmarkham/GoBB/controllers"
-	"github.com/cjmarkham/GoBB/controllers/home"
 )
 
 var configProviders = wire.NewSet(
@@ -20,7 +20,7 @@ var configProviders = wire.NewSet(
 )
 
 var controllerProviders = wire.NewSet(
-	home.ProvideHomeController,
+	home2.ProvideHomeController,
 )
 
 func InitializeApp() (*App, error) {
@@ -29,7 +29,7 @@ func InitializeApp() (*App, error) {
 			GoBB.ProvideLogger,
 			GoBB.ProvideServer,
 			ProvideApp,
-			controllers.ProvideRouter,
+			controllers2.ProvideRouter,
 			wire.Bind(new(http.Handler), new(*mux.Router)),
 
 			configProviders,

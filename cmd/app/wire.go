@@ -6,12 +6,11 @@ import (
 	"net/http"
 
 	"github.com/cjmarkham/GoBB/config"
+	"github.com/cjmarkham/GoBB/src"
 	controllers2 "github.com/cjmarkham/GoBB/src/controllers"
 	home2 "github.com/cjmarkham/GoBB/src/controllers/home"
 	"github.com/google/wire"
 	"github.com/gorilla/mux"
-
-	"github.com/cjmarkham/GoBB"
 )
 
 var configProviders = wire.NewSet(
@@ -26,8 +25,8 @@ var controllerProviders = wire.NewSet(
 func InitializeApp() (*App, error) {
 	panic(
 		wire.Build(
-			GoBB.ProvideLogger,
-			GoBB.ProvideServer,
+			src.ProvideLogger,
+			src.ProvideServer,
 			ProvideApp,
 			controllers2.ProvideRouter,
 			wire.Bind(new(http.Handler), new(*mux.Router)),

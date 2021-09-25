@@ -6,17 +6,17 @@
 package main
 
 import (
-	"github.com/cjmarkham/GoBB"
 	"github.com/cjmarkham/GoBB/config"
-	controllers2 "github.com/cjmarkham/GoBB/src/controllers"
-	home2 "github.com/cjmarkham/GoBB/src/controllers/home"
+	"github.com/cjmarkham/GoBB/src"
+	"github.com/cjmarkham/GoBB/src/controllers"
+	"github.com/cjmarkham/GoBB/src/controllers/home"
 	"github.com/google/wire"
 )
 
 // Injectors from wire.go:
 
 func InitializeApp() (*App, error) {
-	controller, err := home2.ProvideHomeController()
+	controller, err := home.ProvideHomeController()
 	if err != nil {
 		return nil, err
 	}
@@ -24,16 +24,16 @@ func InitializeApp() (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	logger, err := GoBB.ProvideLogger(loggerConfig)
+	logger, err := src.ProvideLogger(loggerConfig)
 	if err != nil {
 		return nil, err
 	}
-	router := controllers2.ProvideRouter(controller, logger)
+	router := controllers.ProvideRouter(controller, logger)
 	serverConfig, err := config.ProvideServerConfig()
 	if err != nil {
 		return nil, err
 	}
-	server := GoBB.ProvideServer(router, serverConfig)
+	server := src.ProvideServer(router, serverConfig)
 	app := ProvideApp(server)
 	return app, nil
 }
@@ -42,4 +42,4 @@ func InitializeApp() (*App, error) {
 
 var configProviders = wire.NewSet(config.ProvideServerConfig, config.ProvideLoggerConfig)
 
-var controllerProviders = wire.NewSet(home2.ProvideHomeController)
+var controllerProviders = wire.NewSet(home.ProvideHomeController)

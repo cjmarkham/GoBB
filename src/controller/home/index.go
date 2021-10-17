@@ -5,15 +5,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/cjmarkham/GoBB/src/domain/forum"
 	"github.com/rs/zerolog/log"
 )
-
-// TODO: Put somewhere else
-type HomeIndexData struct {
-	Title string
-	Forums []forum.Forum
-}
 
 func (c Controller) Index(w http.ResponseWriter, r *http.Request) {
 	forums, err := c.service.GetForums(context.TODO())

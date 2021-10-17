@@ -38,7 +38,7 @@ func InitializeApp() (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	router := controllers.ProvideRouter(controller, logger)
+	router := controller.ProvideRouter(controller, logger)
 	serverConfig, err := config.ProvideServerConfig()
 	if err != nil {
 		return nil, err

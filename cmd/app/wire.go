@@ -43,7 +43,7 @@ func InitializeApp() (*App, error) {
 			src.ProvideLogger,
 			src.ProvideServer,
 			ProvideApp,
-			controllers.ProvideRouter,
+			controller.ProvideRouter,
 			wire.Bind(new(http.Handler), new(*mux.Router)),
 
 			configProviders,

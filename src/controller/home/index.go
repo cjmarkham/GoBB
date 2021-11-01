@@ -29,7 +29,7 @@ func (c Controller) Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := IndexData{
-		Title: "Home",
+		Title:  "Home",
 		Forums: forums,
 		Crumbs: []helpers.Crumb{
 			{

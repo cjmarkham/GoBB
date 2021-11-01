@@ -24,7 +24,7 @@ type Model struct {
 func ProvideRepository(config *config.PostgresqlConfig, db *bun.DB) *Repository {
 	return &Repository{
 		DB:      db,
-		timeout: time.Duration(config.Timeout)*time.Millisecond,
+		timeout: time.Duration(config.Timeout) * time.Millisecond,
 	}
 }
 
@@ -37,8 +37,7 @@ func (r *Repository) FindByID(ctx context.Context, id uuid.UUID) (*forum.Forum, 
 	if err := r.DB.NewSelect().
 		Model(&f).
 		Where("id=?", id).
-		Scan(ctx);
-		err != nil {
+		Scan(ctx); err != nil {
 		log.Error().Err(err).Msg("could not fetch forum")
 		return nil, errors.New("could not fetch forum")
 	}
@@ -55,8 +54,7 @@ func (r *Repository) FindBySlug(ctx context.Context, slug string) (*forum.Forum,
 	if err := r.DB.NewSelect().
 		Model(&f).
 		Where("slug=?", slug).
-		Scan(ctx);
-		err != nil {
+		Scan(ctx); err != nil {
 		log.Error().Err(err).Msg("could not fetch forum")
 		return nil, errors.New("could not fetch forum")
 	}
@@ -76,8 +74,7 @@ func (r *Repository) FindWithParents(ctx context.Context) ([]forum.Forum, error)
 		Where("parent_id=?", uuid.Nil).
 		Limit(10).
 		OrderExpr("created_at ASC").
-		Scan(ctx);
-	err != nil {
+		Scan(ctx); err != nil {
 		log.Error().Err(err).Msg("could not fetch parent forums")
 		return nil, errors.New("could not fetch parent forums")
 	}

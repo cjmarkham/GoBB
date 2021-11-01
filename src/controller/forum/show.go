@@ -39,8 +39,8 @@ func (c Controller) Show(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := IndexData{
-		Title: forum.Name,
-		Forum: forum,
+		Title:  forum.Name,
+		Forum:  forum,
 		Topics: topics,
 		Crumbs: []helpers.Crumb{
 			{

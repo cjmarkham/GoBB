@@ -7,7 +7,7 @@ import (
 
 // IndexData is the template data for the home index page
 type IndexData struct {
-	Title string
+	Title  string
 	Forums []forum.Forum
 	Crumbs []helpers.Crumb
 }

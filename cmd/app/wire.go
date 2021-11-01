@@ -20,8 +20,8 @@ import (
 	"github.com/cjmarkham/GoBB/src/domain/user"
 	"github.com/cjmarkham/GoBB/src/repository"
 	forumRepo "github.com/cjmarkham/GoBB/src/repository/forum"
-	topicRepo "github.com/cjmarkham/GoBB/src/repository/topic"
 	postRepo "github.com/cjmarkham/GoBB/src/repository/post"
+	topicRepo "github.com/cjmarkham/GoBB/src/repository/topic"
 )
 
 var configProviders = wire.NewSet(

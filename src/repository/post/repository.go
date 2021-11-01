@@ -24,7 +24,7 @@ type Model struct {
 func ProvideRepository(config *config.PostgresqlConfig, db *bun.DB) *Repository {
 	return &Repository{
 		DB:      db,
-		timeout: time.Duration(config.Timeout)*time.Millisecond,
+		timeout: time.Duration(config.Timeout) * time.Millisecond,
 	}
 }
 
@@ -38,8 +38,7 @@ func (r *Repository) FindByTopic(ctx context.Context, id uuid.UUID) ([]post.Post
 		Model(&ps).
 		Relation("Author").
 		Where("topic_id=?", id).
-		Scan(ctx);
-		err != nil {
+		Scan(ctx); err != nil {
 		log.Error().Err(err).Msg("could not fetch topic posts")
 		return nil, errors.New("could not fetch topic posts")
 	}

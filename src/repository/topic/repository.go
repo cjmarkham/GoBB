@@ -24,7 +24,7 @@ type Model struct {
 func ProvideRepository(config *config.PostgresqlConfig, db *bun.DB) *Repository {
 	return &Repository{
 		DB:      db,
-		timeout: time.Duration(config.Timeout)*time.Millisecond,
+		timeout: time.Duration(config.Timeout) * time.Millisecond,
 	}
 }
 
@@ -39,8 +39,7 @@ func (r *Repository) FindByForum(ctx context.Context, id uuid.UUID) ([]topic.Top
 		Relation("Author").
 		Relation("LastPoster").
 		Where("forum_id=?", id).
-		Scan(ctx);
-		err != nil {
+		Scan(ctx); err != nil {
 		log.Error().Err(err).Msg("could not fetch forum topics")
 		return nil, errors.New("could not fetch forum topics")
 	}
@@ -57,8 +56,7 @@ func (r *Repository) FindBySlug(ctx context.Context, slug string) (*topic.Topic,
 	if err := r.DB.NewSelect().
 		Model(&t).
 		Where("slug=?", slug).
-		Scan(ctx);
-		err != nil {
+		Scan(ctx); err != nil {
 		log.Error().Err(err).Msg("could not fetch topic")
 		return nil, errors.New("could not fetch topic")
 	}

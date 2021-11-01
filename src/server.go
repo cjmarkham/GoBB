@@ -9,7 +9,7 @@ import (
 
 func ProvideServer(router http.Handler, cfg *config.ServerConfig) *http.Server {
 	return &http.Server{
-		Addr: fmt.Sprintf(":%d", cfg.Port),
+		Addr:    fmt.Sprintf(":%d", cfg.Port),
 		Handler: router,
 	}
 }

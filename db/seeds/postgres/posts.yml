@@ -1,0 +1,10 @@
+- model: Post
+  rows:
+    - id: 61137bb0-d971-4133-896e-256d41c632e4
+      name: New GoBB Forum Software!
+      slug: new-gobb-forum-software
+      topic_id: 23300ba0-6b82-46b7-bb4b-0d265f87fc68
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      content: This is the content
+      created_at: '{{ now }}'
+      updated_at: '{{ now }}'

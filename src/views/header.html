@@ -1,0 +1,13 @@
+{{ define "crumbs" }}
+    <ul class="breadcrumbs">
+        {{ if .Crumbs }}
+            {{ range .Crumbs }}
+                <li>
+                    <a href="{{ .Link }}">
+                        {{ .Name }}
+                    </a>
+                </li>
+            {{ end }}
+        {{ end }}
+    </ul>
+{{ end }}

@@ -1,0 +1,35 @@
+{{ define "extra_css" }}
+    <link rel="stylesheet" href="/public/css/forums.css" />
+{{ end }}
+
+{{ define "content" }}
+<div class="forum-list">
+    <header>
+        <h4>
+            {{ .Title }}
+        </h4>
+    </header>
+    <div class="forum-children">
+        {{ range .Topics }}
+        <div class="forum-child">
+            <div class="forum-name">
+                <a href="/{{ .Slug }}">
+                    {{ .Name }}
+                </a>
+                <p class="forum-description">
+                    By {{ .Author.Username }} &bull; {{ .CreatedAt.Format "Jan 02 2006 15:04:05" }}
+                </p>
+            </div>
+            <div class="forum-topics">{{ .Views }} <span>Views</span></div>
+            <div class="forum-posts">{{ .Posts }} <span>Posts</span></div>
+            <div class="forum-created">
+                <p>
+                    <a href="">{{ .LastPoster.Username }}</a>
+                </p>
+                <p>{{ .CreatedAt.Format "Jan 02 2006 15:04:05" }}</p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

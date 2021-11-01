@@ -1,0 +1,12 @@
+- model: Topic
+  rows:
+    - id: 23300ba0-6b82-46b7-bb4b-0d265f87fc68
+      name: New GoBB Forum Software!
+      slug: new-gobb-forum-software
+      forum_id: 222e3c66-6935-4d67-bf68-990b282d3c49
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      last_poster_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      posts: 1
+      views: 12101
+      created_at: '{{ now }}'
+      updated_at: '{{ now }}'

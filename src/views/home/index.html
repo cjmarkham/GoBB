@@ -1,15 +1,34 @@
-<html lang="en-GB">
-  <head>
-    <title>{{.Title}}</title>
-  </head>
-  <body>
-    <h1>{{.Title}}</h1>
+{{ define "extra_css" }}
+  <link rel="stylesheet" href="/public/css/forums.css" />
+{{ end }}
 
-    <h2>Forums</h2>
-    <ul>
-      {{range .Forums}}
-      <li>ID: {{.ID}}</li>
-      {{end}}
-    </ul>
-  </body>
-</html>
+{{ define "content" }}
+  <div class="forum-list">
+    {{ range .Forums }}
+      <header>
+        <h4>
+          {{.Name }}
+        </h4>
+      </header>
+      <div class="forum-children">
+        {{ range .Children }}
+          <div class="forum-child">
+            <div class="forum-name">
+              <a href="/f/{{ .Slug }}">
+                {{ .Name }}
+              </a>
+              <p class="forum-description">
+                {{ .Description }}
+              </p>
+            </div>
+            <div class="forum-topics">{{ .Topics }} <span>Topics</span></div>
+            <div class="forum-posts">{{ .Posts }} <span>Posts</span></div>
+            <div class="forum-created">
+              <p>{{ .CreatedAt.Format "Jan 02 2006 15:04:05" }}</p>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    {{end}}
+  </div>
+{{ end }}

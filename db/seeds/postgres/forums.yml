@@ -1,0 +1,70 @@
+- model: Forum
+  rows:
+    - id: 81108f60-3842-4133-bf1f-e31be90287a7
+      name: Welcome
+      slug: welcome
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      topics: 0
+      posts: 0
+      parent_id: '{{ uuid_nil }}'
+      created_at: '{{ now }}'
+      updated_at: '{{ now }}'
+    - id: 222e3c66-6935-4d67-bf68-990b282d3c49
+      name: Announcements
+      slug: announcements
+      description: All forum announcements and news will appear here
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      topics: 1
+      posts: 1
+      parent_id: 81108f60-3842-4133-bf1f-e31be90287a7
+      created_at: '{{ x_days_ago 13 }}'
+      updated_at: '{{ x_days_ago 13 }}'
+    - id: b07fdb45-2580-4f83-a393-8cbcaf856d4b
+      name: General Discussion
+      slug: general-discussion
+      description: For discussions that would be off topic elsewhere
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      topics: 0
+      posts: 0
+      parent_id: 81108f60-3842-4133-bf1f-e31be90287a7
+      created_at: '{{ now }}'
+      updated_at: '{{ now }}'
+    - id: e9d29407-c112-4457-82c2-227f269c994b
+      name: Gaming
+      slug: gaming
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      topics: 0
+      posts: 0
+      parent_id: '{{ uuid_nil }}'
+      created_at: '{{ now }}'
+      updated_at: '{{ now }}'
+    - id: 7e5a52f7-a82d-4de7-8687-eba4ec3d73da
+      name: Playstation
+      slug: playstation
+      description: For everything Playstation related
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      topics: 0
+      posts: 0
+      parent_id: e9d29407-c112-4457-82c2-227f269c994b
+      created_at: '{{ x_days_ago 7 }}'
+      updated_at: '{{ x_days_ago 7 }}'
+    - id: 2e898d51-b8f7-4f10-b682-0a4d5ff12745
+      name: Xbox
+      slug: xbox
+      description: For everything Xbox related
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      topics: 0
+      posts: 0
+      parent_id: e9d29407-c112-4457-82c2-227f269c994b
+      created_at: '{{ x_days_ago 3 }}'
+      updated_at: '{{ x_days_ago 3 }}'
+    - id: b3142e8e-f69d-4a67-83f2-99045d4ea1b1
+      name: PC
+      slug: pc
+      description: For everything PC related
+      author_id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      topics: 0
+      posts: 0
+      parent_id: e9d29407-c112-4457-82c2-227f269c994b
+      created_at: '{{ x_days_ago 1 }}'
+      updated_at: '{{ x_days_ago 1 }}'

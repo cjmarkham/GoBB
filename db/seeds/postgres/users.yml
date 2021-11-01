@@ -1,0 +1,6 @@
+- model: User
+  rows:
+    - id: 89eb7969-d6fd-45f0-a454-65dc2f450bd7
+      username: cjmarkham
+      created_at: '{{ now }}'
+      updated_at: '{{ now }}'

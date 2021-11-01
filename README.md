@@ -9,3 +9,9 @@ I started my development career 12 years ago writing forums in PHP, Ruby and eve
 
 ## How?
 Start the app with `make start`. This runs the app in a Docker container and starts up all dependencies.
+
+## Migrations
+
+* Run migrations with `make migrate`
+* Create migrations using `migrate`
+    * `migrate create -ext sql -dir db/migrations create_topics_table`

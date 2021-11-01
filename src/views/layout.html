@@ -1,0 +1,13 @@
+<html lang="en-GB">
+<head>
+    <title>GoBB &bull; {{ .Title }}</title>
+    <link rel="stylesheet" href="/public/css/main.css" />
+    {{ template "extra_css" . }}
+</head>
+<body>
+    <div class="container">
+        {{ template "crumbs" . }}
+        {{ template "content" . }}
+    </div>
+</body>
+</html>

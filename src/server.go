@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"net/http"
 
-	config2 "github.com/cjmarkham/GoBB/config"
+	"github.com/cjmarkham/GoBB/config"
 )
 
-func ProvideServer(router http.Handler, config *config2.ServerConfig) *http.Server {
+func ProvideServer(router http.Handler, cfg *config.ServerConfig) *http.Server {
 	return &http.Server{
-		Addr: fmt.Sprintf(":%d", config.Port),
+		Addr: fmt.Sprintf(":%d", cfg.Port),
 		Handler: router,
 	}
 }

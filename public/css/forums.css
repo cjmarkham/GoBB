@@ -1,0 +1,49 @@
+.forum-list {
+    background-color: #fff;
+}
+
+.forum-list > header {
+    background-color: #34a4eb;
+    padding: .5em 1rem;
+}
+
+.forum-list > header > h4 {
+    margin: 0;
+    color: white;
+    font-weight: 600;
+}
+
+.forum-description {
+    color: #666;
+}
+
+.forum-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.forum-child:not(:last-child) {
+    border-bottom: 1px solid #999;
+    margin-bottom: 1em;
+}
+
+.forum-name {
+    flex: .4;
+}
+
+.forum-topics, .forum-posts {
+    text-align: center;
+    align-self: center;
+}
+
+.forum-topics span, .forum-posts span {
+    color: #666;
+}
+
+.forum-created {
+    flex: .4;
+    text-align: right;
+    justify-content: space-between;
+}

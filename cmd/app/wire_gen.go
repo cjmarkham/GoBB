@@ -8,11 +8,16 @@ package main
 import (
 	"github.com/cjmarkham/GoBB/config"
 	"github.com/cjmarkham/GoBB/src"
-	"github.com/cjmarkham/GoBB/src/controllers"
-	"github.com/cjmarkham/GoBB/src/controllers/home"
+	"github.com/cjmarkham/GoBB/src/controller"
+	forum4 "github.com/cjmarkham/GoBB/src/controller/forum"
+	"github.com/cjmarkham/GoBB/src/controller/home"
 	forum2 "github.com/cjmarkham/GoBB/src/domain/forum"
+	"github.com/cjmarkham/GoBB/src/domain/post"
+	"github.com/cjmarkham/GoBB/src/domain/topic"
+	"github.com/cjmarkham/GoBB/src/domain/user"
 	"github.com/cjmarkham/GoBB/src/repository"
 	"github.com/cjmarkham/GoBB/src/repository/forum"
+	forum3 "github.com/cjmarkham/GoBB/src/repository/topic"
 	"github.com/google/wire"
 )
 
@@ -26,7 +31,13 @@ func InitializeApp() (*App, error) {
 	db := repository.ProvideClient(postgresqlConfig)
 	forumRepository := forum.ProvideRepository(postgresqlConfig, db)
 	service := forum2.ProvideService(forumRepository)
-	controller, err := home.ProvideHomeController(service)
+	homeController, err := home.ProvideController(service)
+	if err != nil {
+		return nil, err
+	}
+	repository2 := forum3.ProvideRepository(postgresqlConfig, db)
+	topicService := topic.ProvideService(repository2)
+	forumController, err := forum4.ProvideController(service, topicService)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +49,7 @@ func InitializeApp() (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	router := controller.ProvideRouter(controller, logger)
+	router := controller.ProvideRouter(homeController, forumController, logger)
 	serverConfig, err := config.ProvideServerConfig()
 	if err != nil {
 		return nil, err
@@ -52,8 +63,8 @@ func InitializeApp() (*App, error) {
 
 var configProviders = wire.NewSet(config.ProvideServerConfig, config.ProvideLoggerConfig)
 
-var controllerProviders = wire.NewSet(home.ProvideHomeController)
+var controllerProviders = wire.NewSet(home.ProvideController, forum4.ProvideController)
 
-var serviceProviders = wire.NewSet(forum2.ProvideService)
+var serviceProviders = wire.NewSet(forum2.ProvideService, topic.ProvideService, post.ProvideService, user.ProvideService)
 
-var repositoryProviders = wire.NewSet(config.ProvidePostgresqlConfig, repository.ProvideClient, forum.ProvideRepository, wire.Bind(new(forum2.Repository), new(*forum.Repository)))
+var repositoryProviders = wire.NewSet(config.ProvidePostgresqlConfig, repository.ProvideClient, forum.ProvideRepository, wire.Bind(new(forum2.Repository), new(*forum.Repository)), forum3.ProvideRepository, wire.Bind(new(topic.Repository), new(*forum3.Repository)))

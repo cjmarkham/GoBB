@@ -1,0 +1,28 @@
+body {
+    font-family: Verdana, Arial, serif;
+    background-color: #eee;
+}
+
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+a {
+    text-decoration: none;
+}
+
+.breadcrumbs {
+    list-style: none;
+    padding-left: 0;
+}
+
+.breadcrumbs > li {
+    display: inline-block;
+}
+
+.breadcrumbs > li:before {
+    content: "/";
+    color: #999;
+}

@@ -1,13 +1,16 @@
 package forum
 
-import "github.com/cjmarkham/GoBB/src/domain/forum"
+import (
+	"github.com/cjmarkham/GoBB/src/domain/forum"
+	"github.com/google/uuid"
+)
 
 type DBResult struct {
-	ID string
+	ID uuid.UUID
 }
 
-func (fr DBResult) ToForum() forum.Forum {
+func (res DBResult) ToForum() forum.Forum {
 	return forum.Forum{
-		ID: fr.ID,
+		ID: res.ID,
 	}
 }

@@ -6,7 +6,7 @@ type Controller struct {
 	service forum.Service
 }
 
-func ProvideHomeController (service forum.Service) (*Controller, error) {
+func ProvideController (service forum.Service) (*Controller, error) {
 	return &Controller{
 		service: service,
 	}, nil

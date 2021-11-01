@@ -26,11 +26,7 @@ func (c Controller) Show(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	}
 
-	tpl, err := template.ParseFiles(
-		"src/views/layout.html",
-		"src/views/header.html",
-		"src/views/forum/show.html",
-	)
+	tpl, err := template.ParseFiles(templates()...)
 
 	if err != nil {
 		log.Error().Err(err).Msg("could not parse templates")
@@ -56,4 +52,13 @@ func (c Controller) Show(w http.ResponseWriter, r *http.Request) {
 	if err := tpl.Execute(w, data); err != nil {
 		log.Error().Err(err).Msg("could not execute templates")
 	}
+}
+
+func templates() []string {
+	templates := helpers.GlobalTemplates()
+	templates = append(templates,
+		"src/views/forum/show.html",
+	)
+
+	return templates
 }

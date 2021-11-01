@@ -2,9 +2,11 @@
 <head>
     <title>GoBB &bull; {{ .Title }}</title>
     <link rel="stylesheet" href="/public/css/main.css" />
+    <link rel="stylesheet" href="/public/css/nav.css" />
     {{ template "extra_css" . }}
 </head>
 <body>
+    {{ template "navigation" . }}
     <div class="container">
         {{ template "crumbs" . }}
         {{ template "content" . }}

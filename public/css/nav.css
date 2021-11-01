@@ -1,0 +1,31 @@
+nav.main {
+    background-color: #34a4eb;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav.main a.brand {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: 1em;
+    min-width: 6em;
+}
+
+nav.main ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+nav.main ul a {
+    color: #fff;
+    padding: 0 1em;
+}
+
+nav.main form {
+    margin: 0;
+    justify-self: flex-end;
+    align-items: flex-end;
+}

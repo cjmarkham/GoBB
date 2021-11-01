@@ -1,10 +1,13 @@
 package post
 
-import "context"
+import (
+	"context"
+
+	"github.com/google/uuid"
+)
 
 type Service interface {
-	GetPosts(ctx context.Context) ([]Post, error)
-	GetTopicPosts(ctx context.Context, topicID string) ([]Post, error)
+	GetTopicPosts(ctx context.Context, topicID uuid.UUID) ([]Post, error)
 }
 
 type service struct {

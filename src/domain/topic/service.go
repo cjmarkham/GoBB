@@ -7,7 +7,8 @@ import (
 )
 
 type Service interface {
-	GetForumTopics(ctx context.Context, forumID uuid.UUID) ([]Topic, error)
+	GetForumTopics(ctx context.Context, id uuid.UUID) ([]Topic, error)
+	GetBySlug(ctx context.Context, slug string) (*Topic, error)
 }
 
 type service struct {

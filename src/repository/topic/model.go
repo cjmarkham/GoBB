@@ -1,4 +1,4 @@
-package forum
+package topic
 
 import (
 	"github.com/cjmarkham/GoBB/src/domain/topic"

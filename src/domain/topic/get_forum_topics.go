@@ -6,6 +6,6 @@ import (
 	"github.com/google/uuid"
 )
 
-func (s service) GetForumTopics(ctx context.Context, forumID uuid.UUID) ([]Topic, error) {
-	return s.repository.FindByForum(ctx, forumID)
+func (s service) GetForumTopics(ctx context.Context, id uuid.UUID) ([]Topic, error) {
+	return s.repository.FindByForum(ctx, id)
 }

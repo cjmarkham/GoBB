@@ -1,4 +1,4 @@
-package forum
+package topic
 
 import (
 	"context"
@@ -28,7 +28,7 @@ func ProvideRepository(config *config.PostgresqlConfig, db *bun.DB) *Repository 
 	}
 }
 
-func (r *Repository) FindByForum(ctx context.Context, forumID uuid.UUID) ([]topic.Topic, error) {
+func (r *Repository) FindByForum(ctx context.Context, id uuid.UUID) ([]topic.Topic, error) {
 	ctx, cancel := context.WithTimeout(ctx, r.timeout)
 	defer cancel()
 
@@ -38,7 +38,7 @@ func (r *Repository) FindByForum(ctx context.Context, forumID uuid.UUID) ([]topi
 		Model(&ts).
 		Relation("Author").
 		Relation("LastPoster").
-		Where("forum_id=?", forumID).
+		Where("forum_id=?", id).
 		Scan(ctx);
 		err != nil {
 		log.Error().Err(err).Msg("could not fetch forum topics")
@@ -46,4 +46,22 @@ func (r *Repository) FindByForum(ctx context.Context, forumID uuid.UUID) ([]topi
 	}
 
 	return ts, nil
+}
+
+func (r *Repository) FindBySlug(ctx context.Context, slug string) (*topic.Topic, error) {
+	ctx, cancel := context.WithTimeout(ctx, r.timeout)
+	defer cancel()
+
+	var t topic.Topic
+
+	if err := r.DB.NewSelect().
+		Model(&t).
+		Where("slug=?", slug).
+		Scan(ctx);
+		err != nil {
+		log.Error().Err(err).Msg("could not fetch topic")
+		return nil, errors.New("could not fetch topic")
+	}
+
+	return &t, nil
 }

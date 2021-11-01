@@ -1,0 +1,26 @@
+{{ define "extra_css" }}
+    <link rel="stylesheet" href="/public/css/topics.css" />
+{{ end }}
+
+{{ define "content" }}
+<div class="post-list">
+    {{ range .Posts }}
+        <div class="post">
+            <header>
+                <h4>{{ .Name }}</h4>
+            </header>
+            <div class="post-body">
+                <div class="post-content">
+                    {{ .Content }}
+                </div>
+                <div class="post-meta">
+                    <p>
+                        <a href="">{{ .Author.Username }}</a>
+                    </p>
+                    <p>{{ .CreatedAt.Format "Jan 02 2006 15:04:05" }}</p>
+                </div>
+            </div>
+        </div>
+    {{ end }}
+</div>
+{{ end }}

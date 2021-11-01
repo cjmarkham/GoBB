@@ -1,8 +1,11 @@
 package post
 
-import "context"
+import (
+	"context"
+
+	"github.com/google/uuid"
+)
 
 type Repository interface {
-	FindAll(ctx context.Context) ([]Post, error)
-	FindByTopic(ctx context.Context, topicID string) ([]Post, error)
+	FindByTopic(ctx context.Context, id uuid.UUID) ([]Post, error)
 }

@@ -9,15 +9,17 @@ import (
 	"github.com/cjmarkham/GoBB/config"
 	"github.com/cjmarkham/GoBB/src"
 	"github.com/cjmarkham/GoBB/src/controller"
-	forum4 "github.com/cjmarkham/GoBB/src/controller/forum"
+	forum3 "github.com/cjmarkham/GoBB/src/controller/forum"
 	"github.com/cjmarkham/GoBB/src/controller/home"
+	topic3 "github.com/cjmarkham/GoBB/src/controller/topic"
 	forum2 "github.com/cjmarkham/GoBB/src/domain/forum"
-	"github.com/cjmarkham/GoBB/src/domain/post"
-	"github.com/cjmarkham/GoBB/src/domain/topic"
+	post2 "github.com/cjmarkham/GoBB/src/domain/post"
+	topic2 "github.com/cjmarkham/GoBB/src/domain/topic"
 	"github.com/cjmarkham/GoBB/src/domain/user"
 	"github.com/cjmarkham/GoBB/src/repository"
 	"github.com/cjmarkham/GoBB/src/repository/forum"
-	forum3 "github.com/cjmarkham/GoBB/src/repository/topic"
+	"github.com/cjmarkham/GoBB/src/repository/post"
+	"github.com/cjmarkham/GoBB/src/repository/topic"
 	"github.com/google/wire"
 )
 
@@ -35,9 +37,15 @@ func InitializeApp() (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	repository2 := forum3.ProvideRepository(postgresqlConfig, db)
-	topicService := topic.ProvideService(repository2)
-	forumController, err := forum4.ProvideController(service, topicService)
+	topicRepository := topic.ProvideRepository(postgresqlConfig, db)
+	topicService := topic2.ProvideService(topicRepository)
+	forumController, err := forum3.ProvideController(service, topicService)
+	if err != nil {
+		return nil, err
+	}
+	postRepository := post.ProvideRepository(postgresqlConfig, db)
+	postService := post2.ProvideService(postRepository)
+	topicController, err := topic3.ProvideController(service, topicService, postService)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +57,7 @@ func InitializeApp() (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	router := controller.ProvideRouter(homeController, forumController, logger)
+	router := controller.ProvideRouter(homeController, forumController, topicController, logger)
 	serverConfig, err := config.ProvideServerConfig()
 	if err != nil {
 		return nil, err
@@ -63,8 +71,8 @@ func InitializeApp() (*App, error) {
 
 var configProviders = wire.NewSet(config.ProvideServerConfig, config.ProvideLoggerConfig)
 
-var controllerProviders = wire.NewSet(home.ProvideController, forum4.ProvideController)
+var controllerProviders = wire.NewSet(home.ProvideController, forum3.ProvideController, topic3.ProvideController)
 
-var serviceProviders = wire.NewSet(forum2.ProvideService, topic.ProvideService, post.ProvideService, user.ProvideService)
+var serviceProviders = wire.NewSet(forum2.ProvideService, topic2.ProvideService, post2.ProvideService, user.ProvideService)
 
-var repositoryProviders = wire.NewSet(config.ProvidePostgresqlConfig, repository.ProvideClient, forum.ProvideRepository, wire.Bind(new(forum2.Repository), new(*forum.Repository)), forum3.ProvideRepository, wire.Bind(new(topic.Repository), new(*forum3.Repository)))
+var repositoryProviders = wire.NewSet(config.ProvidePostgresqlConfig, repository.ProvideClient, forum.ProvideRepository, wire.Bind(new(forum2.Repository), new(*forum.Repository)), topic.ProvideRepository, wire.Bind(new(topic2.Repository), new(*topic.Repository)), post.ProvideRepository, wire.Bind(new(post2.Repository), new(*post.Repository)))

@@ -11,12 +11,12 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-func (c Controller) Index(w http.ResponseWriter, r *http.Request) {
+func (c Controller) Show(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
-	forum, err := c.forumService.GetBySlug(context.TODO(), params["slug"])
+	forum, err := c.forumService.GetBySlug(context.TODO(), params["forumSlug"])
 	if err != nil {
-		log.Error().Err(err).Msg("could not get forum topics")
+		log.Error().Err(err).Msg("could not get forum")
 		w.WriteHeader(http.StatusServiceUnavailable)
 	}
 
@@ -29,7 +29,7 @@ func (c Controller) Index(w http.ResponseWriter, r *http.Request) {
 	tpl, err := template.ParseFiles(
 		"src/views/layout.html",
 		"src/views/header.html",
-		"src/views/forum/index.html",
+		"src/views/forum/show.html",
 	)
 
 	if err != nil {
@@ -40,6 +40,7 @@ func (c Controller) Index(w http.ResponseWriter, r *http.Request) {
 
 	data := IndexData{
 		Title: forum.Name,
+		Forum: forum,
 		Topics: topics,
 		Crumbs: []helpers.Crumb{
 			{

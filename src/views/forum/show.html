@@ -6,14 +6,14 @@
 <div class="forum-list">
     <header>
         <h4>
-            {{ .Title }}
+            {{ .Forum.Name }}
         </h4>
     </header>
     <div class="forum-children">
         {{ range .Topics }}
         <div class="forum-child">
             <div class="forum-name">
-                <a href="/{{ .Slug }}">
+                <a href="/f/{{ $.Forum.Slug }}/t/{{ .Slug }}">
                     {{ .Name }}
                 </a>
                 <p class="forum-description">

@@ -7,5 +7,6 @@ import (
 )
 
 type Repository interface {
-	FindByForum(ctx context.Context, forumID uuid.UUID) ([]Topic, error)
+	FindByForum(ctx context.Context, id uuid.UUID) ([]Topic, error)
+	FindBySlug(ctx context.Context, slug string) (*Topic, error)
 }

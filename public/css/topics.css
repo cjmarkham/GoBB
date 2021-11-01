@@ -1,0 +1,31 @@
+.post-list {
+    background-color: #fff;
+}
+
+.post > header {
+    background-color: #34a4eb;
+    padding: .5em 1rem;
+}
+
+.post > header > h4 {
+    margin: 0;
+    color: white;
+    font-weight: 600;
+}
+
+.post-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-content {
+    flex: .8;
+    padding: 1em;
+    border-right: 1px solid #999;
+}
+
+.post-meta {
+    padding: 1em;
+    text-align: right;
+    flex: .2;
+}

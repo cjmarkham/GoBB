@@ -1,7 +1,11 @@
 package post
 
-import "context"
+import (
+	"context"
 
-func (s service) GetTopicPosts(ctx context.Context, topicID string) ([]Post, error) {
+	"github.com/google/uuid"
+)
+
+func (s service) GetTopicPosts(ctx context.Context, topicID uuid.UUID) ([]Post, error) {
 	return s.repository.FindByTopic(ctx, topicID)
 }

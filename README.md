@@ -9,6 +9,7 @@ I started my development career 12 years ago writing forums in PHP, Ruby and eve
 
 ## How?
 Start the app with `make start`. This runs the app in a Docker container and starts up all dependencies.
+The app will then be available at `localhost:8000`
 
 ## Migrations
 
@@ -18,4 +19,4 @@ Start the app with `make start`. This runs the app in a Docker container and sta
 
 ## Seeding
 * Seed the DB with `make seed`
-* Seeds are located in the `./db/seeds` folder and ran using `bun` fixtures
+* Seeds are located in the `./db/seeds` folder and created using `bun` fixtures

@@ -1,6 +1,6 @@
 .PHONY: start
 start:
-	./bin/start && ./bin/migrate
+	@./bin/start
 
 .PHONY: stop
 stop:

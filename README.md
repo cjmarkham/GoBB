@@ -15,3 +15,7 @@ Start the app with `make start`. This runs the app in a Docker container and sta
 * Run migrations with `make migrate`
 * Create migrations using `migrate`
     * `migrate create -ext sql -dir db/migrations create_topics_table`
+
+## Seeding
+* Seed the DB with `make seed`
+* Seeds are located in the `./db/seeds` folder and ran using `bun` fixtures
